@@ -1,4 +1,4 @@
-#!/bin/bash python2.7
+#!/usr/bin/env python
 
 """
 Count A C G T
