@@ -7,18 +7,24 @@ Return: The total number of pairs of rabbits that will remain after the n-th mon
 """
 
 import fileinput
+import numpy as np
+import sys
 
-def fib(n, k):
+def fibd(n, k):
 	n = int(n)
 	k = int(k)
-	fibs = []
+	fertile = 0
+#	pop = np.zeros(k, dtype = np.float64)
+	pop = np.zeros(k)
 	for i in range(n):
-		if i < 2:
-			fibs.append(1)
+		if i <= 0:
+			pop[0] = 1
 		else:
-			fibs.append(fibs[-1] + fibs[-2]*k)
-	return fibs[-1]
+			fertile = np.sum(pop[1:])
+			pop = np.roll(pop,1)
+			pop[0] = fertile
+	return(np.sum(pop))
 
 for line in fileinput.input():
 	n, k = line.split()
-	print(fib(n,k))
+	print(format(fibd(n,k), '.20f'))
